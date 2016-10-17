@@ -1,0 +1,21 @@
+.form-control {
+    border-radius: 0px !important;
+    border: 1px solid #eee;
+    box-shadow: 0 0 0 #fff !important;
+}
+select:invalid, input:invalid {
+    border-left: 3px solid #f11;
+}
+select:valid, input:valid {
+    border-left: 3px solid #03A9F4;
+}
+#page-wrapper {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.delete-icon {
+    color: #F44336;
+}
+.edit-icon {
+    color: #2196F3;
+}
