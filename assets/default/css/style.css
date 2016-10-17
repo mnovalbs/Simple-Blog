@@ -130,3 +130,35 @@ body > .container {
     padding: 8px 12px;
     margin: 10px 15px 10px 0;
 }
+.widget {
+    /* background: #fff; */
+    background: #fff;
+    /* box-shadow: 1px 1px 3px rgb(228, 228, 228); */
+    border: 1px solid #f2f2f2;
+    /* border-bottom: 4px solid #dedede; */
+    /* border-radius: 5px; */
+    position: relative;
+    /* margin-bottom: 30px; */
+    overflow: hidden;
+}
+.widget > h3 {
+    font-family: 'Bebas';
+    background: #1c83d6;
+    color: #fff;
+    margin: 0 0 10px 0;
+    padding: 10px 15px 5px 15px;
+    font-size: 20px;
+    font-weight: bold;
+    border-left: 3px solid #075a9c;
+}
+.widget-content ul li {
+    margin-bottom: 10px;
+}
+.widget-content ul {
+    padding-left: 20px;
+    list-style: square;
+}
+.widget-content {
+    padding: 10px;
+    font-size: 13px;
+}

@@ -377,7 +377,7 @@ class Admin extends MY_Controller {
           'field' => 'title',
           'label' => 'Judul Halaman',
           'rules' => 'required|max_length[150]',
-          'error' => array(
+          'errors' => array(
             'required' => 'Judul halaman harus terisi',
             'max_length' => 'Judul halaman tidak boleh lebih dari 150 karakter',
           ),
@@ -386,7 +386,7 @@ class Admin extends MY_Controller {
           'field' => 'description',
           'label' => 'Konten Halaman',
           'rules' => 'required',
-          'error' => array(
+          'errors' => array(
             'required' => 'Konten halaman harus terisi',
           ),
         ),
@@ -433,6 +433,7 @@ class Admin extends MY_Controller {
 
   public function edit_user($id=0)
   {
+    $this->arahLogin();
     $id = (int)$id;
     $this->arahLogin();
     $this->load->model('user_model');
@@ -448,6 +449,54 @@ class Admin extends MY_Controller {
     $this->load->view('admin/header');
     $this->load->view('admin/user/user_edit',$data);
     $this->load->view('admin/footer');
+  }
+
+  public function list_kategori()
+  {
+    $this->arahLogin();
+    $this->load->helper(array('form'));
+    $this->load->library('form_validation');
+    $this->load->model('kategori_model');
+
+    $setRules = array(
+      array(
+        'field' => 'title',
+        'label' => 'Nama kategori',
+        'rules' => 'required|max_length[50]',
+        'errors' => array(
+          'required' => 'Nama kategori harus terisi',
+          'max_length' => 'Nama kategori tidak boleh lebih dari 50 karakter',
+        ),
+      ),
+    );
+
+    $this->form_validation->set_rules($setRules);
+    if($this->form_validation->run()!=false)
+    {
+      $this->add_kategori();
+    }
+
+    $data['kategori'] = $this->kategori_model->listKategori();
+
+    $this->load->view('admin/header');
+    $this->load->view('admin/kategori/kategori_list',$data);
+    $this->load->view('admin/footer');
+  }
+
+  public function add_kategori()
+  {
+    $this->arahLogin();
+    $nama = $this->input->post('title');
+    $this->load->model('kategori_model');
+    $this->kategori_model->addKategori($nama);
+  }
+
+  public function delete_kategori($id = 0)
+  {
+    $this->arahLogin();
+    $id = (int)$id;
+    $this->load->model('kategori_model');
+    $this->kategori_model->deleteKategori($id);
   }
 
 }

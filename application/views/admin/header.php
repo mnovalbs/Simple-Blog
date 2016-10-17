@@ -85,6 +85,9 @@
                         </ul>
                       </li>
                       <li>
+                        <a href='<?php echo base_url('admin/list_kategori'); ?>'><i class='fa fa-tags'></i> Kategori</a>
+                      </li>
+                      <li>
                         <a href='#!'><i class='fa fa-users fa-fw'></i> User <span class='fa arrow'></span></a>
                         <ul class='nav nav-second-level'>
                           <li><a href='<?php echo base_url('admin/add_user'); ?>'>Tambah User</a></li>

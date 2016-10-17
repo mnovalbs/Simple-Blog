@@ -11,6 +11,23 @@
       return $query->result_array();
     }
 
+    public function getPost($tahun=0,$bulan=0,$url='')
+    {
+      $tahun = (int)$tahun;
+      $bulan = (int)$bulan;
+      $url = $this->db->escape($url);
+
+      $query = $this->db->query("SELECT * FROM nbs_post WHERE tahun = $tahun AND bulan = $tahun AND url = $url");
+      if($query->num_rows()!=0)
+      {
+        return $query->result_array();
+      }
+      else
+      {
+        return false;
+      }
+    }
+
     public function getArtikel($id=0)
     {
       $id = (int)$id;
@@ -170,6 +187,12 @@
         $query = $this->db->query("SELECT a.*, b.title AS kategori, b.url AS kategori_url FROM nbs_post AS a LEFT JOIN nbs_category AS b ON a.category_id = b.id WHERE a.status = 1 ORDER BY id DESC LIMIT $limit OFFSET $offset");
       }
 
+      return $query->result_array();
+    }
+
+    public function popular()
+    {
+      $query = $this->db->query("SELECT title, url, tahun, bulan FROM nbs_post WHERE status = 1 ORDER BY hits DESC LIMIT 5");
       return $query->result_array();
     }
 
