@@ -27,8 +27,38 @@
 
     public function indexArtikel($offset = 0,$limit = 0)
     {
-      $query = $this->db->get_where('nbs_post', array('status' => 1), $limit, $offset);
+      // $query = $this->db->get_where('nbs_post', array('status' => 1), $limit, $offset);
+      $query = $this->db->query("SELECT a.*, b.title AS kategori, b.url AS kategori_url FROM nbs_post AS a LEFT JOIN nbs_category AS b ON a.category_id = b.id WHERE a.status = 1 ORDER BY id DESC LIMIT $limit OFFSET $offset");
       return $query->result_array();
+    }
+
+    public function banyakArtikel()
+    {
+      $query = $this->db->query("SELECT id FROM nbs_post WHERE status = 1");
+      return $query->num_rows();
+    }
+
+    public function banyakPencarian($q="",$kategori="")
+    {
+      $q = $this->db->escape_str($q);
+      $kategori = $this->db->escape($kategori);
+      if( !empty($q) || !empty($kategori) )
+      {
+        if(!empty($q))
+        {
+          $query = $this->db->query("SELECT a.*, b.title AS kategori, b.url AS kategori_url FROM nbs_post AS a LEFT JOIN nbs_category AS b ON a.category_id = b.id WHERE a.status = 1 AND a.title LIKE '%$q%' ORDER BY id DESC");
+        }
+        else
+        {
+          $query = $this->db->query("SELECT a.*, b.title AS kategori, b.url AS kategori_url FROM nbs_post AS a LEFT JOIN nbs_category AS b ON a.category_id = b.id WHERE a.status = 1 AND a.category_id IN (SELECT id FROM nbs_category WHERE url = $kategori) ORDER BY id DESC");
+        }
+      }
+      else
+      {
+        $query = $this->db->query("SELECT a.*, b.title AS kategori, b.url AS kategori_url FROM nbs_post AS a LEFT JOIN nbs_category AS b ON a.category_id = b.id WHERE a.status = 1 ORDER BY id DESC");
+      }
+
+      return $query->num_rows();
     }
 
     public function getListKategori()
@@ -118,6 +148,29 @@
     public function delete_artikel($id=0)
     {
       $query = $this->db->query("DELETE FROM nbs_post WHERE id = $id");
+    }
+
+    public function search($q = "", $kategori = "", $offset = 0, $limit = 0)
+    {
+      $q = $this->db->escape_str($q);
+      $kategori = $this->db->escape($kategori);
+      if( !empty($q) || !empty($kategori) )
+      {
+        if(!empty($q))
+        {
+          $query = $this->db->query("SELECT a.*, b.title AS kategori, b.url AS kategori_url FROM nbs_post AS a LEFT JOIN nbs_category AS b ON a.category_id = b.id WHERE a.status = 1 AND a.title LIKE '%$q%' ORDER BY id DESC LIMIT $limit OFFSET $offset");
+        }
+        else
+        {
+          $query = $this->db->query("SELECT a.*, b.title AS kategori, b.url AS kategori_url FROM nbs_post AS a LEFT JOIN nbs_category AS b ON a.category_id = b.id WHERE a.status = 1 AND a.category_id IN (SELECT id FROM nbs_category WHERE url = $kategori) ORDER BY id DESC LIMIT $limit OFFSET $offset");
+        }
+      }
+      else
+      {
+        $query = $this->db->query("SELECT a.*, b.title AS kategori, b.url AS kategori_url FROM nbs_post AS a LEFT JOIN nbs_category AS b ON a.category_id = b.id WHERE a.status = 1 ORDER BY id DESC LIMIT $limit OFFSET $offset");
+      }
+
+      return $query->result_array();
     }
 
   }

@@ -1,9 +1,13 @@
 <?php
   class Page_model extends CI_Model{
 
-    public function listPage()
+    public function listPage($id = 0)
     {
-      $query = $this->db->query("SELECT id, title, status, url, TSPost FROM nbs_page ORDER BY id DESC");
+      $tambahan = "";
+      if($id==1){
+        $tambahan = "WHERE status = 1";
+      }
+      $query = $this->db->query("SELECT id, title, status, url, TSPost, short_title FROM nbs_page ".$tambahan." ORDER BY id DESC");
       return $query->result_array();
     }
 

@@ -93,24 +93,27 @@ class Admin extends MY_Controller {
 
   public function list_artikel()
   {
+    $this->arahLogin();
     $this->load->model('artikel_model');
     $data['artikel'] = $this->artikel_model->listArtikel();
     $this->load->view('admin/header');
-    $this->load->view('admin/artikel_list',$data);
+    $this->load->view('admin/artikel/artikel_list',$data);
     $this->load->view('admin/footer');
   }
 
   public function list_halaman()
   {
+    $this->arahLogin();
     $this->load->model('page_model');
     $data['page'] = $this->page_model->listPage();
     $this->load->view('admin/header');
-    $this->load->view('admin/halaman_list',$data);
+    $this->load->view('admin/halaman/halaman_list',$data);
     $this->load->view('admin/footer');
   }
 
   public function add_artikel()
   {
+    $this->arahLogin();
     $this->load->helper(array('form'));
     $this->load->library('form_validation');
     $this->load->model('artikel_model');
@@ -163,12 +166,13 @@ class Admin extends MY_Controller {
       redirect('admin/list_artikel');
     }
 
-    $this->load->view('admin/artikel_add',$data);
+    $this->load->view('admin/artikel/artikel_add',$data);
     $this->load->view('admin/footer');
   }
 
   public function edit_artikel($id=0)
   {
+    $this->arahLogin();
     $id = (int)$id;
     $this->load->helper(array('form'));
     $this->load->library('form_validation');
@@ -230,7 +234,7 @@ class Admin extends MY_Controller {
       redirect('admin/list_artikel');
     }
 
-    $this->load->view('admin/artikel_edit',$data);
+    $this->load->view('admin/artikel/artikel_edit',$data);
     $this->load->view('admin/footer');
   }
 
@@ -284,6 +288,7 @@ class Admin extends MY_Controller {
 
   public function delete_artikel($id=0)
   {
+    $this->arahLogin();
     $id = (int)$id;
     $this->load->model('artikel_model');
     $this->artikel_model->delete_artikel($id);
@@ -292,6 +297,7 @@ class Admin extends MY_Controller {
 
   public function add_halaman()
   {
+    $this->arahLogin();
     $this->load->helper(array('form'));
     $this->load->library('form_validation');
     $this->load->view('admin/header');
@@ -334,7 +340,7 @@ class Admin extends MY_Controller {
       redirect('admin/list_halaman');
     }
 
-    $this->load->view('admin/halaman_add');
+    $this->load->view('admin/halaman/halaman_add');
     $this->load->view('admin/footer');
   }
 
@@ -355,6 +361,7 @@ class Admin extends MY_Controller {
 
   public function edit_halaman($id=0)
   {
+    $this->arahLogin();
     $id = (int)$id;
     $this->load->helper(array('form'));
     $this->load->library('form_validation');
@@ -403,7 +410,7 @@ class Admin extends MY_Controller {
         redirect('admin/list_halaman');
       }
 
-      $this->load->view('admin/halaman_edit',$data);
+      $this->load->view('admin/halaman/halaman_edit',$data);
       $this->load->view('admin/footer');
     }
     else
@@ -411,6 +418,36 @@ class Admin extends MY_Controller {
       redirect('admin/list_halaman');
     }
 
+  }
+
+  public function list_user()
+  {
+    $this->arahLogin();
+    $this->load->model('admin_model');
+    $data['user'] = $this->admin_model->listUser();
+
+    $this->load->view('admin/header');
+    $this->load->view('admin/user/user_list',$data);
+    $this->load->view('admin/footer');
+  }
+
+  public function edit_user($id=0)
+  {
+    $id = (int)$id;
+    $this->arahLogin();
+    $this->load->model('user_model');
+
+
+    if($this->user_model->getUser($id)==false)
+    {
+      redirect('admin/list_user');
+    }
+
+    $data['user'] = $this->user_model->getUser($id)[0];
+
+    $this->load->view('admin/header');
+    $this->load->view('admin/user/user_edit',$data);
+    $this->load->view('admin/footer');
   }
 
 }

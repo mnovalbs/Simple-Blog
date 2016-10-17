@@ -67,34 +67,30 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url('admin'); ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                          <a href='#!'><i class='fa fa-text-o fa-fw'></i> Artikel <span class='fa arrow'></span></a>
-                          <ul class='nav nav-second-level'>
-                            <li><a href='<?php echo base_url('admin/add_artikel'); ?>'>Tambah Artikel</a></li>
-                            <li><a href='<?php echo base_url('admin/list_artikel'); ?>'>Daftar Artikel</a></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href='#!'><i class='fa fa-text-o fa-fw'></i> Halaman <span class='fa arrow'></span></a>
-                          <ul class='nav nav-second-level'>
-                            <li><a href='<?php echo base_url('admin/add_halaman'); ?>'>Tambah Halaman</a></li>
-                            <li><a href='<?php echo base_url('admin/list_halaman'); ?>'>Daftar Halaman</a></li>
-                          </ul>
-                        </li>
+                      <li>
+                          <a href="<?php echo base_url('admin'); ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                      </li>
+                      <li>
+                        <a href='#!'><i class='fa fa-file-text-o fa-fw'></i> Artikel <span class='fa arrow'></span></a>
+                        <ul class='nav nav-second-level'>
+                          <li><a href='<?php echo base_url('admin/add_artikel'); ?>'>Tambah Artikel</a></li>
+                          <li><a href='<?php echo base_url('admin/list_artikel'); ?>'>Daftar Artikel</a></li>
+                        </ul>
+                      </li>
+                      <li>
+                        <a href='#!'><i class='fa fa-file-text-o fa-fw'></i> Halaman <span class='fa arrow'></span></a>
+                        <ul class='nav nav-second-level'>
+                          <li><a href='<?php echo base_url('admin/add_halaman'); ?>'>Tambah Halaman</a></li>
+                          <li><a href='<?php echo base_url('admin/list_halaman'); ?>'>Daftar Halaman</a></li>
+                        </ul>
+                      </li>
+                      <li>
+                        <a href='#!'><i class='fa fa-users fa-fw'></i> User <span class='fa arrow'></span></a>
+                        <ul class='nav nav-second-level'>
+                          <li><a href='<?php echo base_url('admin/add_user'); ?>'>Tambah User</a></li>
+                          <li><a href='<?php echo base_url('admin/list_user'); ?>'>Daftar User</a></li>
+                        </ul>
+                      </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

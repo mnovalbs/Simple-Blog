@@ -9,7 +9,7 @@ class Home extends MY_Controller {
 
   }
 
-	public function index($page = 1)
+	public function index($page = 0)
 	{
     if($page < 1){$page = 1;}
     $limit = $this->config->item('site_post');
@@ -28,7 +28,7 @@ class Home extends MY_Controller {
         $imageName = 'thumb.jpg';
       }
 
-      if(!file_exists(FCPATH.'assets/images/'.$imageName))
+      if(!file_exists(FCPATH.'uploads/'.$imageName))
       {
         $imageName = 'thumb.jpg';
       }
@@ -44,6 +44,8 @@ class Home extends MY_Controller {
 
     $data['artikel'] = $artikel;
     $data['kategori'] = $this->artikel_model->getListKategori();
+    $data['page'] = $page;
+    $data['banyak'] = $this->artikel_model->banyakArtikel();
 
     $site = $this->site_model->getSettings();
     $this->load->view('default/header.php');
@@ -55,16 +57,16 @@ class Home extends MY_Controller {
   {
     $this->load->library('image_lib');
     $config['image_library']  = 'gd2';
-    $config['source_image']   = FCPATH.'assets/images/'.$fileName;
+    $config['source_image']   = FCPATH.'uploads/'.$fileName;
     $config['create_thumb']   = FALSE;
     $config['maintain_ratio'] = FALSE;
     $config['width']          = $width;
     $config['height']         = $height;
-    $config['new_image']      = FCPATH.'assets/images/'.$width.'x'.$height.'/'.$fileName;
+    $config['new_image']      = FCPATH.'uploads/'.$width.'x'.$height.'/'.$fileName;
 
-    if(!file_exists(FCPATH.'assets/images/'.$width.'x'.$height.'/'))
+    if(!file_exists(FCPATH.'uploads/'.$width.'x'.$height.'/'))
     {
-      mkdir(FCPATH.'assets/images/'.$width.'x'.$height.'/',0777);
+      mkdir(FCPATH.'uploads/'.$width.'x'.$height.'/',0777);
     }
 
     $this->image_lib->initialize($config);

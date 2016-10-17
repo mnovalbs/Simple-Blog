@@ -15,6 +15,12 @@ class Admin_model extends CI_Model{
     }
   }
 
+  public function listUser()
+  {
+    $query = $this->db->query("SELECT * FROM nbs_user ORDER BY name ASC");
+    return $query->result_array();
+  }
+
   public function get_user($id=0,$kunci='')
   {
     if( !empty($kunci) )
