@@ -19,3 +19,35 @@ select:valid, input:valid {
 .edit-icon {
     color: #2196F3;
 }
+.btn {
+    border-radius: 0px;
+    border: 0px;
+    padding: 10px 15px;
+    font-weight: bold;
+}
+.btn-primary {
+    background-color: #03a9f4;
+}
+.widget-content .hilang {
+    display: none;
+    margin: 0 -11px;
+    padding: 11px;
+    background: #efefef;
+}
+.widget {
+    background: #f8f8f8;
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.widget-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.widget-edit {
+    margin-top: 10px;
+    font-size: small;
+}
+.widget-edit a{
+    margin-right: 10px;
+}

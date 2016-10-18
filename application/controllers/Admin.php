@@ -23,7 +23,7 @@ class Admin extends MY_Controller {
   {
     if(!$this->isLoggedIn())
     {
-      redirect('admin/login');
+      die(redirect('admin/login'));
     }
   }
 
@@ -497,6 +497,144 @@ class Admin extends MY_Controller {
     $id = (int)$id;
     $this->load->model('kategori_model');
     $this->kategori_model->deleteKategori($id);
+  }
+
+  public function settings_info()
+  {
+    $this->arahLogin();
+    $this->load->helper(array('form'));
+    $this->load->library('form_validation');
+    $this->load->model('site_model');
+    $this->load->view('admin/header');
+
+    $setRules = array(
+      array(
+        'field' => 'title',
+        'label' => 'Judul situs',
+        'rules' => 'required|max_length[100]',
+        'errors' => array(
+          'required' => 'Judul situs wajib terisi',
+        ),
+      ),
+      array(
+        'field' => 'tagline',
+        'label' => 'Tagline',
+        'rules' => 'max_length[100]',
+      ),
+      array(
+        'field' => 'description',
+        'label' => 'Deskripsi',
+        'rules' => 'max_length[300]',
+      ),
+      array(
+        'field' => 'keyword',
+        'label' => 'Keywords',
+        'rules' => 'max_length[300]',
+      ),
+      array(
+        'field' => 'post_sum',
+        'label' => 'Post/page',
+        'rules' => 'required|numeric|greater_than_equal_to[1]|less_than_equal_to[99]',
+      ),
+      array(
+        'field' => 'email',
+        'label' => 'Email',
+        'rules' => 'required|max_length[100]',
+      ),
+    );
+
+    $this->form_validation->set_rules($setRules);
+
+    if($this->form_validation->run()!=false)
+    {
+      $this->save_general_setting();
+    }
+
+    $data = $this->site_model->getSettings();
+
+    $this->load->view('admin/settings/settings_info',$data);
+    $this->load->view('admin/footer');
+  }
+
+  protected function save_general_setting()
+  {
+    $this->arahLogin();
+    $this->load->model('site_model');
+    $tagline = $description = $keywords = "";
+    $title = $this->input->post('title');
+    $tagline = $this->input->post('tagline');
+    $description = $this->input->post('description');
+    $keywords = $this->input->post('keyword');
+    $post_sum = $this->input->post('post_sum');
+    $email = $this->input->post('email');
+
+    $this->site_model->setSettings($title, $tagline, $description, $keywords, $post_sum, $email);
+  }
+
+  public function settings_widgets()
+  {
+    $this->arahLogin();
+    $this->load->helper(array('form'));
+    $this->load->library('form_validation');
+    $this->load->model('site_model');
+
+    $this->load->view('admin/header');
+
+    $setRules = array(
+      array(
+        'field' => 'title',
+        'label' => 'Title widget',
+        'rules' => 'max_length[100]',
+      ),
+      array(
+        'field' => 'content',
+        'label' => 'Isi widget',
+        'rules' => 'required',
+      ),
+      array(
+        'field' => 'id',
+        'label' => 'Id widget',
+        'rules' => 'required|numeric',
+        'errors' => array(
+          'required' => 'Ada sesuatu yang tidak sesuai',
+          'numeric' => 'Ada sesuatu yang tidak sesuai',
+        ),
+      ),
+    );
+
+    $this->form_validation->set_rules($setRules);
+
+    if($this->form_validation->run()!=false)
+    {
+      $this->do_edit_widget();
+    }
+
+    $data['sidebar'] = $this->site_model->getWidgets();
+    $this->load->view('admin/settings/settings_widget',$data);
+    $this->load->view('admin/footer');
+  }
+
+  protected function do_edit_widget()
+  {
+    $this->load->model('site_model');
+    $title = $this->input->post('title');
+    $id = $this->input->post('id');
+    $konten = "";
+    if(!empty($this->input->post('content')))
+    {
+      $konten = $this->input->post('content');
+    }
+
+    $this->site_model->editWidget($id,$title,$konten);
+  }
+
+  public function delete_widget($id=0)
+  {
+    $this->arahLogin();
+    $id = (int)$id;
+    $this->load->model('site_model');
+    $this->site_model->deleteWidget($id);
+    redirect('admin/settings_widgets');
   }
 
 }

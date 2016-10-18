@@ -25,6 +25,11 @@
       $("#unsave-form").areYouSure({
         message: 'Ada beberapa perubahan yang belum disimpan. Yakin ingin keluar dari halaman ini?'
       });
+
+      $(".do_edit").click(function(){
+        $(".widget-content .hilang").slideUp(200);
+        $(this).parents(".widget").children(".widget-content").children('.hilang').slideDown(200);
+      });
   });
   </script>
 

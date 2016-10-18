@@ -94,6 +94,13 @@
                           <li><a href='<?php echo base_url('admin/list_user'); ?>'>Daftar User</a></li>
                         </ul>
                       </li>
+                      <li>
+                        <a href='#!'><i class='fa fa-config fa-fw'></i> Settings <span class='fa arrow'></span></a>
+                        <ul class='nav nav-second-level'>
+                          <li><a href='<?php echo base_url('admin/settings_info'); ?>'>General Settings</a></li>
+                          <li><a href='<?php echo base_url('admin/settings_widgets'); ?>'>Widget Settings</a></li>
+                        </ul>
+                      </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
