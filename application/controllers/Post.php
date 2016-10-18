@@ -5,12 +5,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     public function index($tahun=0,$bulan=0,$url='')
     {
+      // echo $tahun;
       $this->load->model('artikel_model');
       $artikel = $this->artikel_model->getPost($tahun,$bulan,$url);
       $this->load->view('default/header');
       if($artikel!=false)
       {
-        $this->load->view('default/post');
+        $data['artikel'] = $artikel;
+        $this->load->view('default/post',$data);
       }
       else
       {

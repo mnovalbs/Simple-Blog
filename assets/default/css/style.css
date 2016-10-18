@@ -106,7 +106,7 @@ body > .container {
     padding: 0px;
     margin: 0px;
     list-style: none;
-    float: right;
+    /*float: right;*/
 }
 .head-title a {
     font-family: 'Bebas';
@@ -161,4 +161,22 @@ body > .container {
 .widget-content {
     padding: 10px;
     font-size: 13px;
+}
+#single-article {
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #eee;
+}
+#single-article > h2 {
+    font-family: 'Bebas';
+    margin: 0 0 10px 0;
+    font-size: 40px;
+    font-weight: bold;
+    color: #de3a42;
+}
+#single-article > small {
+    margin-bottom: 15px;
+    display: block;
+    font-style: italic;
+    font-size: 10px;
 }

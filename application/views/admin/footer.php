@@ -27,8 +27,8 @@
       });
 
       $(".do_edit").click(function(){
-        $(".widget-content .hilang").slideUp(200);
-        $(this).parents(".widget").children(".widget-content").children('.hilang').slideDown(200);
+        // $(".widget-content .hilang").slideUp(200);
+        $(this).parents(".widget").children(".widget-content").children('.hilang').slideToggle(200);
       });
   });
   </script>

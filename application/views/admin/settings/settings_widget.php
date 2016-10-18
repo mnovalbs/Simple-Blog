@@ -3,6 +3,15 @@
 ?>
 <div class='row'>
   <div class='col-sm-4'>
+    <?php echo form_open('admin/add_sidebar'); ?>
+      <div class='form-group'>
+        <input type='text' placeholder='Widget title' class='form-control' name='new_sidebar_title' value='<?php echo $this->form_validation->set_value('new_sidebar_title'); ?>'/>
+      </div>
+      <div class='form-group'>
+        <textarea name='new_sidebar_content' placeholder='Widget content' required rows='10' class='form-control' style='margin-bottom:10px;'><?php echo $this->form_validation->set_value('new_sidebar_content'); ?></textarea>
+        <div style='text-align:right;'><button type='submit' name='submit' class='btn btn-primary'>Tambah</button></div>
+      </div>
+    </form>
     <?php
       foreach ($sidebar as $swid) {
         $title = "Widget";
@@ -32,6 +41,11 @@
     ?>
   </div>
   <div class='col-sm-8'>
-
+    <?php echo form_open('admin/set_widget_header'); ?>
+      <div class='form-group'>
+        <textarea class='form-control' placeholder='Header widget' name='header_widget'><?php echo safe_echo_input($widget_header['content']); ?></textarea>
+      </div>
+      <button type='submit' name='submit' class='btn btn-primary'>Simpan</button>
+    </form>
   </div>
 </div>

@@ -41,4 +41,30 @@ class Site_model extends CI_Model{
     $query = $this->db->query("UPDATE nbs_site_widgets_sidebar SET title = $title, content = $konten WHERE id = $id");
   }
 
+  public function add_widget($title='',$konten='')
+  {
+    $title = $this->db->escape($title);
+    $konten = $this->db->escape($konten);
+    $query = $this->db->query("INSERT INTO nbs_site_widgets_sidebar (title,content,position) VALUES ($title,$konten,0)");
+  }
+
+  public function get_header_widget()
+  {
+    $query = $this->db->query("SELECT * FROM nbs_site_widgets_header ORDER BY id LIMIT 1");
+    return $query->row_array();
+  }
+
+  public function set_widget_header($konten='')
+  {
+    if(empty($konten))
+    {
+      $query = $this->db->query("DELETE FROM nbs_site_widgets_header");
+    }
+    else
+    {
+      $konten = $this->db->escape($konten);
+      $query = $this->db->query("INSERT INTO nbs_site_widgets_header (content) VALUES($konten)");
+    }
+  }
+
 }

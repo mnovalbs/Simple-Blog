@@ -57,7 +57,7 @@ if(!function_exists('safe_echo_html'))
 
 if(!function_exists('safe_echo_input'))
 {
-  function safe_echo_input($string)
+  function safe_echo_input($string='')
   {
     return trim(preg_replace('/\s+/',' ', htmlspecialchars($string, ENT_QUOTES)));
   }

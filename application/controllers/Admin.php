@@ -610,8 +610,92 @@ class Admin extends MY_Controller {
     }
 
     $data['sidebar'] = $this->site_model->getWidgets();
+    $data['widget_header'] = $this->site_model->get_header_widget();
     $this->load->view('admin/settings/settings_widget',$data);
     $this->load->view('admin/footer');
+  }
+
+  public function set_widget_header()
+  {
+    $this->arahLogin();
+    $this->load->helper(array('form'));
+    $this->load->model('site_model');
+    $this->load->library('form_validation');
+
+    $this->load->view('admin/header');
+
+    // echo $this->input->post('header_widget');
+    // if($this->input->post('header_widget')!==null){
+    //   echo "yes";
+    // }
+
+    if($this->input->post('header_widget')!==null)
+    {
+      $this->do_set_widget_header();
+    }
+
+    $data['sidebar'] = $this->site_model->getWidgets();
+    $data['widget_header'] = $this->site_model->get_header_widget();
+    $this->load->view('admin/settings/settings_widget',$data);
+    $this->load->view('admin/footer');
+  }
+
+  protected function do_set_widget_header()
+  {
+    $this->arahLogin();
+    $this->load->model('site_model');
+    $konten = "";
+    if(!empty($this->input->post('header_widget')))
+    {
+      $konten = $this->input->post('header_widget');
+    }
+    $this->site_model->set_widget_header($konten);
+  }
+
+  public function add_sidebar()
+  {
+    $this->arahLogin();
+    $this->load->helper(array('form'));
+    $this->load->library('form_validation');
+    $this->load->view('admin/header');
+    $this->load->model('site_model');
+
+    $setRules = array(
+      array(
+        'field' => 'new_sidebar_title',
+        'label' => 'Title widget',
+        'rules' => 'max_length[100]',
+      ),
+      array(
+        'field' => 'new_sidebar_content',
+        'label' => 'Isi widget',
+        'rules' => 'required',
+      ),
+    );
+
+    $this->form_validation->set_rules($setRules);
+
+    if($this->form_validation->run()!=false)
+    {
+      $this->do_add_sidebar();
+    }
+    $data['widget_header'] = $this->site_model->get_header_widget();
+    $data['sidebar'] = $this->site_model->getWidgets();
+    $this->load->view('admin/settings/settings_widget',$data);
+    $this->load->view('admin/footer');
+  }
+
+  protected function do_add_sidebar()
+  {
+    $this->arahLogin();
+    $this->load->model('site_model');
+    $title = "";
+    $content = $this->input->post('new_sidebar_content');
+    if(!empty($this->input->post('new_sidebar_title')))
+    {
+      $title = $this->input->post('new_sidebar_title');
+    }
+    $this->site_model->add_widget($title,$content);
   }
 
   protected function do_edit_widget()

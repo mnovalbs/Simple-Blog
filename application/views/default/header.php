@@ -23,9 +23,9 @@
   <body>
     <nav id='nav-wrapper'>
       <div class='container'>
-        <div class='left head-title'>
+        <!-- <div class='left head-title'>
           <a href='<?php echo base_url(); ?>'><?php echo safe_echo_html($this->config->item('site_title')); ?></a>
-        </div>
+        </div> -->
         <ul>
           <li><a href='<?php echo base_url(); ?>'>Home</a></li>
           <?php

@@ -17,10 +17,10 @@
       $bulan = (int)$bulan;
       $url = $this->db->escape($url);
 
-      $query = $this->db->query("SELECT * FROM nbs_post WHERE tahun = $tahun AND bulan = $tahun AND url = $url");
+      $query = $this->db->query("SELECT a.*,b.name AS author FROM nbs_post AS a LEFT JOIN nbs_user AS b ON a.author_id = b.id WHERE a.tahun = $tahun AND a.bulan = $bulan AND a.url = $url");
       if($query->num_rows()!=0)
       {
-        return $query->result_array();
+        return $query->row_array();
       }
       else
       {
