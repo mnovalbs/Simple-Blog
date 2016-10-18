@@ -25,6 +25,9 @@
       </div>
     </div>
   </div>
+
+  <footer>Copyright &copy; <?php echo date("Y"); ?> Mahasiswa.id<br/>Developed by <a href='mailto:noval@mahasiswa.id'>noval@mahasiswa.id</a></footer>
+
 <script src="<?php echo base_url('assets/default/js/jquery-3.1.1.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/default/js/bootstrap.min.js'); ?>"></script>
 </body>
