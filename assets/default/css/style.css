@@ -180,3 +180,31 @@ body > .container {
     font-style: italic;
     font-size: 10px;
 }
+#single-article > div {
+    line-height: 27px;
+}
+#single-article blockquote {
+    font-size: 14px;
+    margin: 20px 0 20px 20px;
+}
+footer {
+    text-align: center;
+    font-size: small;
+    color: #666;
+    margin: 10px 0;
+}
+.list-post .dalam img{
+  width: 100%;
+}
+@media screen and (max-width:991px) {
+  .list-post.col-sm-4 {
+      width: 50%;
+      float: left;
+  }
+}
+@media screen and (max-width:470px) {
+  .list-post.col-sm-4 {
+      width: 100%;
+      float: none;
+  }
+}
